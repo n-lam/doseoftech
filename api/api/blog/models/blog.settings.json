@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "blogs",
+  "info": {
+    "name": "Blog"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 100
+    },
+    "Content": {
+      "type": "richtext",
+      "required": true
+    },
+    "PublishDate": {
+      "type": "datetime"
+    },
+    "Tags": {
+      "via": "Blogs",
+      "collection": "tag"
+    },
+    "Authors": {
+      "via": "Blogs",
+      "collection": "author",
+      "dominant": true
+    }
+  }
+}

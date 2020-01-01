@@ -1,0 +1,24 @@
+{
+  "info": {
+    "name": "LegalName",
+    "icon": "gavel"
+  },
+  "options": {},
+  "attributes": {
+    "Surname": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "GivenNames": {
+      "type": "string",
+      "required": true
+    },
+    "PreferredName": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "connection": "default",
+  "collectionName": "components_names_legal_names"
+}

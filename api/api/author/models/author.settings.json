@@ -1,0 +1,29 @@
+{
+  "connection": "default",
+  "collectionName": "authors",
+  "info": {
+    "name": "Author"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "User": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "Blogs": {
+      "collection": "blog",
+      "via": "Authors"
+    },
+    "Bio": {
+      "type": "richtext"
+    },
+    "DisplayName": {
+      "type": "component",
+      "repeatable": false,
+      "component": "names.display-name"
+    }
+  }
+}
