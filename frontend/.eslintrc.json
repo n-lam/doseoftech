@@ -1,0 +1,53 @@
+{
+    "env": {
+      "browser": true,
+      "es2020": true
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "airbnb",
+      "eslint-config-prettier",
+      "airbnb-typescript-prettier"
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 11,
+      "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "eslint-plugin-prettier"],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
+    "rules": {
+      // This is a default eslint rule that does not work with Typescript
+      "no-unused-vars": ["off"],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      ],
+      "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".tsx"] }],
+      "prettier/prettier": ["error"],
+      "jsx-a11y/anchor-is-valid": ["off"],
+      "react/jsx-props-no-spreading": ["off"],
+      "no-mixed-operators": ["off"]
+      // "import/no-unresolved": [0]
+    }
+  }
+  
