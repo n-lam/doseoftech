@@ -6,6 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import Router from 'next/router';
+import { unsetToken } from '../utils/auth';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -32,11 +34,16 @@ type Section = {
 type HeaderProps = {
   sections: Section[];
   title: string;
+  isAuthenticated: boolean;
 };
 
 export default function Header(props: HeaderProps): JSX.Element {
   const classes = useStyles();
-  const { sections, title } = props;
+  const { sections, title, isAuthenticated } = props;
+  const logout = () => {
+    unsetToken();
+    Router.push('/');
+  };
 
   return (
     <>
@@ -55,9 +62,15 @@ export default function Header(props: HeaderProps): JSX.Element {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small">
-          Sign up
-        </Button>
+        {isAuthenticated ? (
+          <Button variant="outlined" size="small" onClick={logout}>
+            Logout
+          </Button>
+        ) : (
+          <Button variant="outlined" size="small" href="/signup">
+            Sign up
+          </Button>
+        )}
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
