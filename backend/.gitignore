@@ -65,7 +65,7 @@ $RECYCLE.BIN/
 # Logs and databases
 ############################
 
-.tmp
+# .tmp  # FIX: Find a better way to version control test data
 *.log
 *.sql
 *.sqlite
