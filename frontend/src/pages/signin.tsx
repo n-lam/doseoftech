@@ -1,4 +1,4 @@
-import React, { useState, MouseEventHandler } from 'react';
+import React, { useState, FormEventHandler } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -43,7 +43,7 @@ const SignIn: NextPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit: MouseEventHandler = () => {
+  const onSubmit: FormEventHandler = (event) => {
     Axios.post('http://localhost:1337/auth/local', {
       identifier: username,
       password,
@@ -59,6 +59,7 @@ const SignIn: NextPage = () => {
         // Handle error.
         console.log('An error occurred:', error.response);
       });
+    event.preventDefault();
   };
 
   return (
@@ -71,7 +72,7 @@ const SignIn: NextPage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={onSubmit} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -103,12 +104,11 @@ const SignIn: NextPage = () => {
             label="Remember me"
           />
           <Button
-            // type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSubmit}
+            type="submit"
           >
             Sign In
           </Button>

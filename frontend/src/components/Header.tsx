@@ -42,6 +42,7 @@ export default function Header(props: HeaderProps): JSX.Element {
   const { sections, title, isAuthenticated } = props;
   const logout = () => {
     unsetToken();
+    console.log('Unset token');
     Router.push('/');
   };
 
