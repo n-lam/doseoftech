@@ -4,8 +4,6 @@ import Header from '../components/Header';
 import MainFeaturedPost from '../components/MainFeaturedPost';
 import { getUserFromLocalCookie, getUserFromServerCookie } from '../utils/auth';
 
-const sections = [{ title: 'About Me' }, { title: 'Blog' }];
-
 const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
   description:
@@ -19,11 +17,10 @@ type HomeProps = {
   isAuthenticated: boolean;
 };
 
-const Home: NextPage<HomeProps> = (props) => {
-  const { isAuthenticated } = props;
+const Home: NextPage<HomeProps> = () => {
   return (
     <>
-      <Header title="Dose of Tech" sections={sections} isAuthenticated={isAuthenticated} />
+      <Header />
       <main>
         <MainFeaturedPost post={mainFeaturedPost} />
       </main>
