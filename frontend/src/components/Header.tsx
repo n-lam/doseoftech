@@ -136,7 +136,7 @@ export default function Header(): JSX.Element {
     setState({ ...state, isOpen });
   };
 
-  const list = () => (
+  const list = (
     <div
       className={clsx(classes.list)}
       role="presentation"
@@ -169,7 +169,7 @@ export default function Header(): JSX.Element {
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
       >
-        {list()}
+        {list}
       </SwipeableDrawer>
       <AppBar position="static" color="transparent">
         <Toolbar>
