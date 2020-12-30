@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import { NextPage } from 'next';
 import Axios from 'axios';
 import Copyright from '../components/Copyright';
-import { setToken } from '../utils/auth';
+import AuthContext from '../components/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,6 +46,8 @@ const SignUp: NextPage = () => {
   const [password, setPassword] = useState('');
   const [newsletterOptIn, toggleNewsletterOptIn] = useState(true);
 
+  const authContext = useContext(AuthContext);
+
   const onSubmit = (event) => {
     Axios.post('http://localhost:1337/auth/local/register', {
       firstName,
@@ -56,15 +58,9 @@ const SignUp: NextPage = () => {
       newsletterOptIn,
     }).then((response) => {
       // Handle success.
-      // console.log('Well done!');
-      // console.log('User profile', response.data.user);
-      // console.log('User token', response.data.jwt);
-      setToken(response.data.user, response.data.jwt);
+
+      authContext.login(response.data.jwt, response.data.user);
     });
-    // .catch((error) => {
-    //   // Handle error.
-    //   console.error('An error occurred:', error.response);
-    // });
     event.preventDefault();
   };
 

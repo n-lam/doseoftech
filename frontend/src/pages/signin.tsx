@@ -1,4 +1,4 @@
-import React, { useState, FormEventHandler } from 'react';
+import React, { useState, FormEventHandler, useContext } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,8 +15,7 @@ import Container from '@material-ui/core/Container';
 import { NextPage } from 'next';
 import Axios from 'axios';
 import Copyright from '../components/Copyright';
-// import { setToken } from '../utils/auth';
-import userContext from '../components/UserContext';
+import AuthContext from '../components/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,7 +42,8 @@ const SignIn: NextPage = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({ userId: {}, jwt: {} });
+
+  const authContext = useContext(AuthContext);
 
   const onSubmit: FormEventHandler = (event) => {
     Axios.post('http://localhost:1337/auth/local', {
@@ -56,7 +56,7 @@ const SignIn: NextPage = () => {
         console.log('User profile', response.data.user);
         console.log('User token', response.data.jwt);
         // setToken(response.data.user, response.data.jwt);
-        setUser({ userId: response.data.user, jwt: response.data.jwt });
+        authContext.login(response.data.jwt, response.data.user);
       })
       .catch((error) => {
         // Handle error.
@@ -66,75 +66,73 @@ const SignIn: NextPage = () => {
   };
 
   return (
-    <userContext.Provider value={user}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} onSubmit={onSubmit} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              type="submit"
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  Don&apos;t have an account? Sign Up
-                </Link>
-              </Grid>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form} onSubmit={onSubmit} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            type="submit"
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
             </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
-    </userContext.Provider>
+            <Grid item>
+              <Link href="/signup" variant="body2">
+                Don&apos;t have an account? Sign Up
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+    </Container>
   );
 };
 

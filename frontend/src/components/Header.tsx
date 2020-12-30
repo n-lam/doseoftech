@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, fade, Theme, createStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -22,7 +22,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { SwipeableDrawer } from '@material-ui/core';
-import userContext from './UserContext';
+import AuthContext from './AuthContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -99,6 +99,8 @@ export default function Header(): JSX.Element {
   });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
+  const authContext = useContext(AuthContext);
+
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -107,6 +109,11 @@ export default function Header(): JSX.Element {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleMenuClose();
+    authContext.logout();
   };
 
   const menuId = 'primary-search-account-menu';
@@ -122,7 +129,7 @@ export default function Header(): JSX.Element {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -223,14 +230,9 @@ export default function Header(): JSX.Element {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <userContext.Consumer>
-            {(user) => {
-              console.log(user.userData);
-              return (
-                <div className={classes.accountSection}>{user ? accountProfile : signInButton}</div>
-              );
-            }}
-          </userContext.Consumer>
+          <div className={classes.accountSection}>
+            {authContext.isAuthenticated ? accountProfile : signInButton}
+          </div>
         </Toolbar>
       </AppBar>
       {renderMenu}
