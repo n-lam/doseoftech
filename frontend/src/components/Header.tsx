@@ -11,6 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
+import Button from '@material-ui/core/Button';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
@@ -21,6 +22,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { SwipeableDrawer } from '@material-ui/core';
+import userContext from './UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -119,7 +121,8 @@ export default function Header(): JSX.Element {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
 
@@ -161,6 +164,27 @@ export default function Header(): JSX.Element {
     </div>
   );
 
+  const accountProfile = (
+    <IconButton
+      edge="end"
+      aria-label="account of current user"
+      aria-controls={menuId}
+      aria-haspopup="true"
+      onClick={handleProfileMenuOpen}
+      color="inherit"
+    >
+      <AccountCircle />
+    </IconButton>
+  );
+
+  // const isAuth = false;
+
+  const signInButton = (
+    <Button variant="outlined" href="/signin">
+      Sign In
+    </Button>
+  );
+
   return (
     <div className={classes.grow}>
       <SwipeableDrawer
@@ -199,18 +223,14 @@ export default function Header(): JSX.Element {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <div className={classes.accountSection}>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
+          <userContext.Consumer>
+            {(user) => {
+              console.log(user.userData);
+              return (
+                <div className={classes.accountSection}>{user ? accountProfile : signInButton}</div>
+              );
+            }}
+          </userContext.Consumer>
         </Toolbar>
       </AppBar>
       {renderMenu}
