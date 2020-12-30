@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, fade, Theme, createStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,6 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
+import Button from '@material-ui/core/Button';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
@@ -21,6 +22,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { SwipeableDrawer } from '@material-ui/core';
+import AuthContext from './AuthContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -97,6 +99,8 @@ export default function Header(): JSX.Element {
   });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
+  const authContext = useContext(AuthContext);
+
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -105,6 +109,11 @@ export default function Header(): JSX.Element {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleMenuClose();
+    authContext.logout();
   };
 
   const menuId = 'primary-search-account-menu';
@@ -119,7 +128,8 @@ export default function Header(): JSX.Element {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -161,6 +171,27 @@ export default function Header(): JSX.Element {
     </div>
   );
 
+  const accountProfile = (
+    <IconButton
+      edge="end"
+      aria-label="account of current user"
+      aria-controls={menuId}
+      aria-haspopup="true"
+      onClick={handleProfileMenuOpen}
+      color="inherit"
+    >
+      <AccountCircle />
+    </IconButton>
+  );
+
+  // const isAuth = false;
+
+  const signInButton = (
+    <Button variant="outlined" href="/signin">
+      Sign In
+    </Button>
+  );
+
   return (
     <div className={classes.grow}>
       <SwipeableDrawer
@@ -200,16 +231,7 @@ export default function Header(): JSX.Element {
             />
           </div>
           <div className={classes.accountSection}>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            {authContext.isAuthenticated ? accountProfile : signInButton}
           </div>
         </Toolbar>
       </AppBar>

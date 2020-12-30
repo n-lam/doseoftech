@@ -12,14 +12,17 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "clsx": "^1.1.1",
+    "cookie": "^0.4.1",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "next": "9.4.4",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "16.13.1",
     "react-markdown": "^4.3.1",
-    "typeface-roboto": "^0.0.75"
+    "typeface-roboto": "^0.0.75",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",

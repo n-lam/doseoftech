@@ -1,4 +1,4 @@
-import React, { useState, FormEventHandler } from 'react';
+import React, { useState, FormEventHandler, useContext } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import { NextPage } from 'next';
 import Axios from 'axios';
 import Copyright from '../components/Copyright';
-import { setToken } from '../utils/auth';
+import AuthContext from '../components/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,6 +43,8 @@ const SignIn: NextPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const authContext = useContext(AuthContext);
+
   const onSubmit: FormEventHandler = (event) => {
     Axios.post('http://localhost:1337/auth/local', {
       identifier: username,
@@ -53,7 +55,8 @@ const SignIn: NextPage = () => {
         console.log('Well done!');
         console.log('User profile', response.data.user);
         console.log('User token', response.data.jwt);
-        setToken(response.data.user, response.data.jwt);
+        // setToken(response.data.user, response.data.jwt);
+        authContext.login(response.data.jwt, response.data.user);
       })
       .catch((error) => {
         // Handle error.
