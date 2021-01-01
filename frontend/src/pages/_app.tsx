@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
-import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import theme from '../styles/theme';
-import AuthContext from '../components/AuthContext';
+import AuthContext from '../utils/AuthContext';
 
 type UserData = {
   username: string;

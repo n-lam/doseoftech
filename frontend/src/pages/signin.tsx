@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import { NextPage } from 'next';
 import Axios from 'axios';
 import Copyright from '../components/Copyright';
-import AuthContext from '../components/AuthContext';
+import AuthContext from '../utils/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

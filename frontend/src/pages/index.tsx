@@ -1,7 +1,7 @@
-import React from 'react';
 import { NextPage } from 'next';
-import Header from '../components/Header';
+import React from 'react';
 import FeatureArticle from '../components/FeatureArticle';
+import Header from '../components/Header';
 
 type HomeProps = {
   isAuthenticated: boolean;
@@ -11,9 +11,7 @@ const Home: NextPage<HomeProps> = () => {
   return (
     <>
       <Header />
-      <main>
-        <FeatureArticle />
-      </main>
+      <FeatureArticle />
     </>
   );
 };

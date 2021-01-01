@@ -1,28 +1,28 @@
 import React, { useContext } from 'react';
+
+// Material UI components
+import AppBar from '@material-ui/core/AppBar';
 import { makeStyles, fade, Theme, createStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
-
-import AppBar from '@material-ui/core/AppBar';
-
 import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
-
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
-import clsx from 'clsx';
-
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { SwipeableDrawer } from '@material-ui/core';
-import AuthContext from './AuthContext';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+
+import clsx from 'clsx';
+import ListItemLink from '../ListItemLink';
+
+import AuthContext from '../../utils/AuthContext';
+import MenuItems from './data';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -87,11 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Section = {
-  title: string;
-  url?: string;
-};
-
 export default function Header(): JSX.Element {
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -155,17 +150,17 @@ export default function Header(): JSX.Element {
     >
       <List>
         {['Education', 'Lifestyle'].map((text) => (
-          <ListItem button key={text}>
+          <ListItemLink button key={text}>
             <ListItemText primary={text} />
-          </ListItem>
+          </ListItemLink>
         ))}
       </List>
       <Divider />
       <List>
-        {['About', 'Contact'].map((text) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
+        {MenuItems.map((item) => (
+          <ListItemLink button key={item.name} href={item.link}>
+            <ListItemText primary={item.name} />
+          </ListItemLink>
         ))}
       </List>
     </div>
@@ -183,8 +178,6 @@ export default function Header(): JSX.Element {
       <AccountCircle />
     </IconButton>
   );
-
-  // const isAuth = false;
 
   const signInButton = (
     <Button variant="outlined" href="/signin">
