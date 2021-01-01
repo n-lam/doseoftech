@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { NextPage } from 'next';
 import Axios from 'axios';
+import { useRouter } from 'next/router';
 import Copyright from '../components/Copyright';
 import AuthContext from '../utils/AuthContext';
 
@@ -38,6 +39,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp: NextPage = () => {
+  const router = useRouter();
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    if (authContext.isAuthenticated) {
+      router.push('/');
+    }
+  }, [authContext.isAuthenticated, router]);
+
   const classes = useStyles();
 
   const [firstName, setFirstName] = useState('');
@@ -45,8 +55,6 @@ const SignUp: NextPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [newsletterOptIn, toggleNewsletterOptIn] = useState(true);
-
-  const authContext = useContext(AuthContext);
 
   const onSubmit = (event) => {
     Axios.post('http://localhost:1337/auth/local/register', {

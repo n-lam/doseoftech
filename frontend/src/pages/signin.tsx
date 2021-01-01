@@ -1,4 +1,4 @@
-import React, { useState, FormEventHandler, useContext } from 'react';
+import React, { useState, FormEventHandler, useContext, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { NextPage } from 'next';
 import Axios from 'axios';
+import { useRouter } from 'next/router';
 import Copyright from '../components/Copyright';
 import AuthContext from '../utils/AuthContext';
 
@@ -38,12 +39,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn: NextPage = () => {
+  const router = useRouter();
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    if (authContext.isAuthenticated) {
+      router.push('/');
+    }
+  }, [authContext.isAuthenticated, router]);
   const classes = useStyles();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const authContext = useContext(AuthContext);
 
   const onSubmit: FormEventHandler = (event) => {
     Axios.post('http://localhost:1337/auth/local', {
