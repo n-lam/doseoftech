@@ -53,7 +53,7 @@ const SignIn: NextPage = () => {
   const [password, setPassword] = useState('');
 
   const onSubmit: FormEventHandler = (event) => {
-    Axios.post('http://localhost:1337/auth/local', {
+    Axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/local`, {
       identifier: username,
       password,
     })

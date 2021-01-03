@@ -65,7 +65,7 @@ $RECYCLE.BIN/
 # Logs and databases
 ############################
 
-.tmp
+# .tmp  # FIX: Find a better way to version control test data
 *.log
 *.sql
 *.sqlite
@@ -95,6 +95,7 @@ results
 node_modules
 .node_history
 
+
 ############################
 # Tests
 ############################
@@ -107,8 +108,6 @@ coverage
 ############################
 
 .env
-license.txt
 exports
-*.cache
+.cache
 build
-.strapi-updater.json

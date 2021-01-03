@@ -57,7 +57,7 @@ const SignUp: NextPage = () => {
   const [newsletterOptIn, toggleNewsletterOptIn] = useState(true);
 
   const onSubmit = (event) => {
-    Axios.post('http://localhost:1337/auth/local/register', {
+    Axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/local/register`, {
       firstName,
       lastName,
       username,

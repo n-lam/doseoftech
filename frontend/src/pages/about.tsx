@@ -39,7 +39,7 @@ const About: NextPage = () => {
   const classes = useStyles();
   const [description, setDescription] = useState('Loading...');
   useEffect(() => {
-    Axios.get('http://localhost:1337/about')
+    Axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/about`)
       .then((res: AboutResponse) => {
         const { data } = res;
         setDescription(ConvertApiLink(data.description));
