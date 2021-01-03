@@ -6,6 +6,7 @@
     "description": ""
   },
   "options": {
+    "draftAndPublish": false,
     "timestamps": true
   },
   "attributes": {
@@ -33,6 +34,11 @@
       "private": true
     },
     "resetPasswordToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
+    },
+    "confirmationToken": {
       "type": "string",
       "configurable": false,
       "private": true
