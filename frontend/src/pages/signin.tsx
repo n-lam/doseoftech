@@ -59,15 +59,11 @@ const SignIn: NextPage = () => {
     })
       .then((response) => {
         // Handle success.
-        console.log('Well done!');
-        console.log('User profile', response.data.user);
-        console.log('User token', response.data.jwt);
-        // setToken(response.data.user, response.data.jwt);
         authContext.login(response.data.jwt, response.data.user);
       })
       .catch((error) => {
         // Handle error.
-        console.log('An error occurred:', error.response);
+        console.error('An error occurred:', error.response);
       });
     event.preventDefault();
   };

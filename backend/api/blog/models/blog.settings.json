@@ -2,21 +2,20 @@
   "kind": "collectionType",
   "collectionName": "blogs",
   "info": {
-    "name": "Blog"
+    "name": "Blog",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
       "type": "string"
     },
-    "post": {
+    "content": {
       "type": "richtext"
-    },
-    "slug": {
-      "type": "uid"
     },
     "coverPhoto": {
       "model": "file",
@@ -27,6 +26,11 @@
         "videos"
       ],
       "plugin": "upload",
+      "required": false
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
       "required": false
     }
   }

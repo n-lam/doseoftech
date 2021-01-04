@@ -4,6 +4,8 @@ export type MenuItem = {
 };
 
 const MenuItems: MenuItem[] = [
+  { name: 'Home', link: '/' },
+  { name: 'Blog', link: '/blogs' },
   { name: 'About', link: '/about' },
   { name: 'Contact', link: '/contact' },
 ];
