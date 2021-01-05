@@ -2,13 +2,12 @@ import { GetServerSideProps, NextPage } from 'next';
 import ErrorPage from 'next/error';
 import React from 'react';
 import axios from 'axios';
-import ReactMarkdown from 'react-markdown';
 import Container from '@material-ui/core/Container';
 
 // import { makeStyles } from '@material-ui/core/styles';
 import Header from '../../components/Header';
-import Image from '../../components/Image';
 import { BlogPostModel } from '../../models/BlogPost';
+import BlogPostComponent from '../../components/BlogPost';
 
 type Error = {
   error: unknown;
@@ -23,21 +22,11 @@ const BlogPost: NextPage<PropsWithError> = (props) => {
   }
 
   const { title, content, coverPhoto } = props as BlogPostModel;
-  const renderers = {
-    image: Image,
-  };
   return (
     <>
       <Header />
       <Container>
-        <h1>{title}</h1>
-        {!!coverPhoto && (
-          <Image
-            src={`${coverPhoto.formats.medium?.url || coverPhoto.url}`}
-            alt={coverPhoto.alternativeText}
-          />
-        )}
-        <ReactMarkdown source={content} renderers={renderers} />
+        <BlogPostComponent title={title} content={content} coverPhoto={coverPhoto} />
       </Container>
     </>
   );

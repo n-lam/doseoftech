@@ -1,4 +1,4 @@
-import { ImageModel } from './Image';
+import { CoverPhoto } from './CoverPhoto';
 
 export type BlogPostModel = {
   id: number;
@@ -8,16 +8,6 @@ export type BlogPostModel = {
   created_at: string;
   // eslint-disable-next-line camelcase
   updated_at: string;
-  coverPhoto: {
-    name: string;
-    url: string;
-    alternativeText: string;
-    formats: {
-      large?: ImageModel;
-      small?: ImageModel;
-      medium?: ImageModel;
-      thumbnail?: ImageModel;
-    };
-  };
+  coverPhoto: CoverPhoto;
   slug: string;
 };

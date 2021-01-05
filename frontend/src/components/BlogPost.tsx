@@ -1,11 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Image from './Image';
-import { BlogPostModel } from '../models/BlogPost';
+import { CoverPhoto } from '../models/CoverPhoto';
 
-type BlogPostProps = BlogPostModel;
+type BlogPostProps = {
+  title: string;
+  content: string;
+  coverPhoto: CoverPhoto;
+};
 
-const BlogPost: FunctionComponent<BlogPostProps> = ({
+const BlogPostComponent: FunctionComponent<BlogPostProps> = ({
   title,
   content,
   coverPhoto,
@@ -16,10 +20,15 @@ const BlogPost: FunctionComponent<BlogPostProps> = ({
   return (
     <>
       <h1>{title}</h1>
-      <Image src={coverPhoto.url} alt={coverPhoto.alternativeText} />
+      {!!coverPhoto && (
+        <Image
+          src={`${coverPhoto.formats.medium?.url || coverPhoto.url}`}
+          alt={coverPhoto.alternativeText}
+        />
+      )}
       <ReactMarkdown source={content} renderers={renderers} />
     </>
   );
 };
 
-export default BlogPost;
+export default BlogPostComponent;
