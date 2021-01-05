@@ -47,7 +47,7 @@
       "jsx-a11y/anchor-is-valid": ["off"],
       "react/jsx-props-no-spreading": ["off"],
       "no-mixed-operators": ["off"],
-      "no-console": ["error", { "allow": ["error"] }]
+      "no-console": ["warn", { "allow": ["error"] }]
       // "import/no-unresolved": [0]
     }
   }
