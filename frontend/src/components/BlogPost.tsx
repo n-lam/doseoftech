@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { BlogPostModel } from './model';
-import Image from '../Image';
+import Image from './Image';
+import { BlogPostModel } from '../models/BlogPost';
 
 type BlogPostProps = BlogPostModel;
 
@@ -23,5 +23,3 @@ const BlogPost: FunctionComponent<BlogPostProps> = ({
 };
 
 export default BlogPost;
-
-export * from './model';

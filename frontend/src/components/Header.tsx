@@ -18,10 +18,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
 import clsx from 'clsx';
-import ListItemLink from '../ListItemLink';
+import ListItemLink from './ListItemLink';
 
-import AuthContext from '../../utils/AuthContext';
-import MenuItems from './data';
+import AuthContext from '../utils/AuthContext';
+import MenuItems from '../models/MenuItems';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

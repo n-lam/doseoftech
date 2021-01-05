@@ -7,9 +7,9 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Grid from '@material-ui/core/Grid';
 import remark from 'remark';
 import strip from 'strip-markdown';
-import { BlogPostModel } from '../../components/BlogPost';
 import Header from '../../components/Header';
 import BlogPreviewCard from '../../components/BlogPreviewCard';
+import { BlogPostModel } from '../../models/BlogPost';
 
 type BlogIndexModel = {
   posts: BlogPostModel[];

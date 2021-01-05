@@ -7,6 +7,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
+import { BlogPreviewModel } from '../models/BlogPreview';
 
 const useStyles = makeStyles({
   root: {
@@ -23,18 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface FeaturedPostProps {
-  post: {
-    date: string;
-    description: string;
-    image: string;
-    imageText: string;
-    title: string;
-    link: string;
-  };
-}
-
-const BlogPreviewCard: FunctionComponent<FeaturedPostProps> = (props) => {
+const BlogPreviewCard: FunctionComponent<BlogPreviewModel> = (props) => {
   const classes = useStyles();
   const { post } = props;
 

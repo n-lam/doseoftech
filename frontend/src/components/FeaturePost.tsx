@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import { BlogPreviewModel } from '../models/BlogPreview';
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +28,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FeatureArticle(): JSX.Element {
+type FeatureArticleProps = BlogPreviewModel;
+
+export default function FeaturePost({ post }: FeatureArticleProps): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -36,19 +39,22 @@ export default function FeatureArticle(): JSX.Element {
         <Grid container justify="center" className={classes.feature}>
           <Grid item>
             <Card className={classes.card}>
-              <CardActionArea>
+              <CardActionArea component="a" href={`/blog/${post.link}`}>
                 <CardMedia
                   className={classes.media}
-                  image="https://source.unsplash.com/random"
-                  title="Feature Article Cover Photo"
+                  image={
+                    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${post.image}` ||
+                    'https://source.unsplash.com/random'
+                  }
+                  title={post.imageText || 'Feature Article Cover Photo'}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    This is a feature article with a long title
+                    {post.title || 'This is a feature article with a long title'}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000 species,
-                    ranging across all continents except Antarctica
+                    {post.description ||
+                      'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'}
                   </Typography>
                 </CardContent>
               </CardActionArea>
