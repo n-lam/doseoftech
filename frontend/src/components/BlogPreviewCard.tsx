@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     flex: 1,
   },
   cardMedia: {
-    width: 160,
+    width: '250px',
   },
 });
 
@@ -42,6 +42,13 @@ const BlogPreviewCard: FunctionComponent<FeaturedPostProps> = (props) => {
     <Grid className={classes.root} item xs={12} md={6}>
       <CardActionArea component="a" href={`/blog/${post.link}`}>
         <Card className={classes.card}>
+          <Hidden smDown>
+            <CardMedia
+              className={classes.cardMedia}
+              image={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${post.image}`}
+              title={post.imageText}
+            />
+          </Hidden>
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
@@ -51,20 +58,13 @@ const BlogPreviewCard: FunctionComponent<FeaturedPostProps> = (props) => {
                 {post.date}
               </Typography>
               <Typography variant="subtitle1" paragraph>
-                {post.description}
+                {`${post.description} ...`}
               </Typography>
               <Typography variant="subtitle1" color="primary">
                 Continue reading...
               </Typography>
             </CardContent>
           </div>
-          <Hidden smDown>
-            <CardMedia
-              className={classes.cardMedia}
-              image={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${post.image}`}
-              title={post.imageText}
-            />
-          </Hidden>
         </Card>
       </CardActionArea>
     </Grid>

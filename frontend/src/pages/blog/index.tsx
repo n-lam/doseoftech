@@ -5,6 +5,8 @@ import Container from '@material-ui/core/Container';
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Grid from '@material-ui/core/Grid';
+import remark from 'remark';
+import strip from 'strip-markdown';
 import { BlogPostModel } from '../../components/BlogPost';
 import Header from '../../components/Header';
 import BlogPreviewCard from '../../components/BlogPreviewCard';
@@ -22,7 +24,7 @@ type BlogIndexProps = BlogIndexModel | Error;
 const useStyles = makeStyles({
   root: {
     alignItems: 'center',
-    padding: '50px',
+    padding: '10px',
   },
 });
 
@@ -38,12 +40,14 @@ const Blog: NextPage<BlogIndexProps> = (props) => {
   const BlogList = (
     <Grid container justify="center" direction="column" alignItems="center">
       {posts.map((post) => {
+        const postDate = new Date(post.created_at).toLocaleDateString('en-GB');
+        const description = remark().use(strip).processSync(post.content).toString();
         return (
           <BlogPreviewCard
             key={post.id}
             post={{
-              date: post.created_at,
-              description: post.content.substring(0, 50),
+              date: postDate,
+              description: description.substring(0, 100),
               image: post.coverPhoto?.url,
               imageText: post.coverPhoto?.alternativeText,
               title: post.title,
