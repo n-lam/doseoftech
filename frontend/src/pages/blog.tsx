@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BlogIndex: NextPage<BlogIndexProps> = (props) => {
+const Blog: NextPage<BlogIndexProps> = (props) => {
   const classes = useStyles();
   const error = props as Error;
   if (error.error) {
@@ -38,6 +38,7 @@ const BlogIndex: NextPage<BlogIndexProps> = (props) => {
     return (
       <>
         <BlogPreviewCard
+          key={post.id}
           post={{
             date: post.created_at,
             description: post.content.substring(0, 50),
@@ -60,7 +61,7 @@ const BlogIndex: NextPage<BlogIndexProps> = (props) => {
   );
 };
 
-BlogIndex.getInitialProps = async () => {
+Blog.getInitialProps = async () => {
   try {
     const { data } = await Axios.get<BlogPostModel[]>(
       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/blogs`
@@ -76,4 +77,4 @@ BlogIndex.getInitialProps = async () => {
   }
 };
 
-export default BlogIndex;
+export default Blog;

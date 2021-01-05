@@ -1,4 +1,5 @@
 export type BlogPostModel = {
+  id: number;
   title: string;
   content: string;
   // eslint-disable-next-line camelcase
