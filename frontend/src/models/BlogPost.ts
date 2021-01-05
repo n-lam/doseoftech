@@ -1,3 +1,5 @@
+import { ImageModel } from './Image';
+
 export type BlogPostModel = {
   id: number;
   title: string;
@@ -10,6 +12,12 @@ export type BlogPostModel = {
     name: string;
     url: string;
     alternativeText: string;
+    formats: {
+      large?: ImageModel;
+      small?: ImageModel;
+      medium?: ImageModel;
+      thumbnail?: ImageModel;
+    };
   };
   slug: string;
 };

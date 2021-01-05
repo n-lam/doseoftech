@@ -5,7 +5,7 @@ import React from 'react';
 import FeaturePost from '../components/FeaturePost';
 import Header from '../components/Header';
 import { BlogPostModel } from '../models/BlogPost';
-import post2Props from '../utils/post2Props';
+import post2Props from '../utils/post2preview';
 
 type Error = {
   error: unknown;

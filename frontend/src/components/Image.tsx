@@ -20,13 +20,11 @@ const useStyles = makeStyles(() => ({
 
 const Image = ({ alt, src }: ImageProps): JSX.Element => {
   const classes = useStyles();
+  const imgSrc =
+    src.match('https://')?.length > 0 ? src : `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${src}`;
   return (
     <div className={classes.imagePlaceholder}>
-      <img
-        alt={alt}
-        src={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${src}`}
-        className={classes.aboutImages}
-      />
+      <img alt={alt} src={imgSrc} className={classes.aboutImages} />
     </div>
   );
 };

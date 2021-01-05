@@ -8,22 +8,13 @@ import Container from '@material-ui/core/Container';
 // import { makeStyles } from '@material-ui/core/styles';
 import Header from '../../components/Header';
 import Image from '../../components/Image';
-
-type BlogPostProps = {
-  title: string;
-  content: string;
-  coverPhoto: {
-    name: string;
-    url: string;
-    alternativeText: string;
-  };
-};
+import { BlogPostModel } from '../../models/BlogPost';
 
 type Error = {
   error: unknown;
 };
 
-type PropsWithError = BlogPostProps | Error;
+type PropsWithError = BlogPostModel | Error;
 
 const BlogPost: NextPage<PropsWithError> = (props) => {
   const errorProps = props as Error;
@@ -31,7 +22,7 @@ const BlogPost: NextPage<PropsWithError> = (props) => {
     return <ErrorPage statusCode={404} />;
   }
 
-  const { title, content, coverPhoto } = props as BlogPostProps;
+  const { title, content, coverPhoto } = props as BlogPostModel;
   const renderers = {
     image: Image,
   };
@@ -40,7 +31,12 @@ const BlogPost: NextPage<PropsWithError> = (props) => {
       <Header />
       <Container>
         <h1>{title}</h1>
-        {!!coverPhoto && <Image src={coverPhoto?.url} alt={coverPhoto?.alternativeText} />}
+        {!!coverPhoto && (
+          <Image
+            src={`${coverPhoto.formats.medium?.url || coverPhoto.url}`}
+            alt={coverPhoto.alternativeText}
+          />
+        )}
         <ReactMarkdown source={content} renderers={renderers} />
       </Container>
     </>
@@ -49,7 +45,7 @@ const BlogPost: NextPage<PropsWithError> = (props) => {
 
 export const getServerSideProps: GetServerSideProps<PropsWithError> = async ({ params }) => {
   try {
-    const { data } = await axios.get<BlogPostProps[]>(
+    const { data } = await axios.get<BlogPostModel[]>(
       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/blogs?slug=${params.slug}`
     );
 

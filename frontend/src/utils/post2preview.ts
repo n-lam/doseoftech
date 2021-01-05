@@ -10,7 +10,7 @@ const post2Props = (post: BlogPostModel): BlogPreviewModel => {
     post: {
       date: postDate,
       description: description.substring(0, 100),
-      image: post.coverPhoto?.url,
+      image: post.coverPhoto?.formats.medium?.url,
       imageText: post.coverPhoto?.alternativeText,
       title: post.title,
       link: post.slug,
