@@ -8,7 +8,8 @@ type ImageProps = {
 
 const useStyles = makeStyles(() => ({
   aboutImages: {
-    width: '90%',
+    width: 'auto',
+    maxWidth: '80%',
     borderRadius: '10px',
     boxShadow: '3px 5px 2px 1px rgba(0, 0, 0, 0.2)',
     margin: '20px',

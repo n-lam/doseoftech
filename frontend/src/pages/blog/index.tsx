@@ -48,7 +48,7 @@ const Blog: NextPage<BlogIndexProps> = (props) => {
             post={{
               date: postDate,
               description: description.substring(0, 100),
-              image: post.coverPhoto?.url,
+              image: post.coverPhoto?.formats.thumbnail?.url,
               imageText: post.coverPhoto?.alternativeText,
               title: post.title,
               link: post.slug,
