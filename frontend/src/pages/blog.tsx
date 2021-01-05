@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import ErrorPage from 'next/error';
 import Container from '@material-ui/core/Container';
 import React from 'react';
@@ -60,18 +60,18 @@ const BlogIndex: NextPage<BlogIndexProps> = (props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<BlogIndexProps> = async () => {
+BlogIndex.getInitialProps = async () => {
   try {
     const { data } = await Axios.get<BlogPostModel[]>(
       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/blogs`
     );
     return {
-      props: { posts: data },
+      posts: data,
     };
   } catch (error) {
     console.error(error);
     return {
-      props: { error: JSON.stringify(error) },
+      error: JSON.stringify(error),
     };
   }
 };

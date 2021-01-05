@@ -5,7 +5,7 @@ export type MenuItem = {
 
 const MenuItems: MenuItem[] = [
   { name: 'Home', link: '/' },
-  { name: 'Blog', link: '/blogs' },
+  { name: 'Blog', link: '/blog' },
   { name: 'About', link: '/about' },
   { name: 'Contact', link: '/contact' },
 ];
