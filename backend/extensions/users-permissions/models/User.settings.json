@@ -67,6 +67,10 @@
     },
     "newsletterOptIn": {
       "type": "boolean"
+    },
+    "likes": {
+      "collection": "blog",
+      "via": "likedBy"
     }
   }
 }

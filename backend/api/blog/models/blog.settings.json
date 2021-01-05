@@ -32,6 +32,12 @@
       "type": "string",
       "unique": true,
       "required": false
+    },
+    "likedBy": {
+      "via": "likes",
+      "plugin": "users-permissions",
+      "collection": "user",
+      "dominant": true
     }
   }
 }
