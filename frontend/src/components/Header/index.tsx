@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     accountSection: {
       display: 'flex',
+      minWidth: 'fit-content',
     },
     list: {
       width: 250,
