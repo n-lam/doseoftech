@@ -14,7 +14,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
@@ -149,14 +148,6 @@ export default function Header(): JSX.Element {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List>
-        {['Education', 'Lifestyle'].map((text) => (
-          <ListItemLink button key={text}>
-            <ListItemText primary={text} />
-          </ListItemLink>
-        ))}
-      </List>
-      <Divider />
       <List>
         {MenuItems.map((item) => (
           <ListItemLink button key={item.name} href={item.link}>
