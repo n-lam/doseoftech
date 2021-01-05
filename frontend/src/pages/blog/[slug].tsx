@@ -40,7 +40,7 @@ const BlogPost: NextPage<PropsWithError> = (props) => {
       <Header />
       <Container>
         <h1>{title}</h1>
-        <Image src={coverPhoto.url} alt={coverPhoto.alternativeText} />
+        {!!coverPhoto && <Image src={coverPhoto?.url} alt={coverPhoto?.alternativeText} />}
         <ReactMarkdown source={content} renderers={renderers} />
       </Container>
     </>

@@ -4,9 +4,10 @@ import ErrorPage from 'next/error';
 import Container from '@material-ui/core/Container';
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { BlogPostModel } from '../components/BlogPost';
-import Header from '../components/Header';
-import BlogPreviewCard from '../components/BlogPreviewCard';
+import Grid from '@material-ui/core/Grid';
+import { BlogPostModel } from '../../components/BlogPost';
+import Header from '../../components/Header';
+import BlogPreviewCard from '../../components/BlogPreviewCard';
 
 type BlogIndexModel = {
   posts: BlogPostModel[];
@@ -34,23 +35,25 @@ const Blog: NextPage<BlogIndexProps> = (props) => {
   }
 
   const { posts } = props as BlogIndexModel;
-  const BlogList = posts.map((post) => {
-    return (
-      <>
-        <BlogPreviewCard
-          key={post.id}
-          post={{
-            date: post.created_at,
-            description: post.content.substring(0, 50),
-            image: post.coverPhoto.url,
-            imageText: post.coverPhoto.alternativeText,
-            title: post.title,
-            link: post.slug,
-          }}
-        />
-      </>
-    );
-  });
+  const BlogList = (
+    <Grid container justify="center" direction="column" alignItems="center">
+      {posts.map((post) => {
+        return (
+          <BlogPreviewCard
+            key={post.id}
+            post={{
+              date: post.created_at,
+              description: post.content.substring(0, 50),
+              image: post.coverPhoto?.url,
+              imageText: post.coverPhoto?.alternativeText,
+              title: post.title,
+              link: post.slug,
+            }}
+          />
+        );
+      })}
+    </Grid>
+  );
   return (
     <>
       <Header />

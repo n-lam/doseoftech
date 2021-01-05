@@ -9,6 +9,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles({
+  root: {
+    padding: '10px',
+  },
   card: {
     display: 'flex',
   },
@@ -36,7 +39,7 @@ const BlogPreviewCard: FunctionComponent<FeaturedPostProps> = (props) => {
   const { post } = props;
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid className={classes.root} item xs={12} md={6}>
       <CardActionArea component="a" href={`/blog/${post.link}`}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
