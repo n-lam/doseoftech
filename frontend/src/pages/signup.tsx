@@ -64,11 +64,15 @@ const SignUp: NextPage = () => {
       email: username,
       password: 'password',
       newsletterOptIn,
-    }).then((response) => {
-      // Handle success.
+    })
+      .then((response) => {
+        // Handle success.
 
-      authContext.login(response.data.jwt, response.data.user);
-    });
+        authContext.login(response.data.jwt, response.data.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     event.preventDefault();
   };
 
